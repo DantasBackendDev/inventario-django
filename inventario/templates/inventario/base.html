@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}Inventário{% endblock %}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: #f4f5f7;
+            color: #1f2937;
+            line-height: 1.5;
+        }
+
+        header {
+            background-color: #1e3a5f;
+            color: #fff;
+            padding: 1rem 2rem;
+        }
+
+        header h1 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        nav {
+            background-color: #274b7a;
+            padding: 0.75rem 2rem;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: #dbeafe;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        nav a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        thead {
+            background-color: #e5e7eb;
+        }
+
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        th {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            color: #4b5563;
+        }
+
+        tbody tr:hover {
+            background-color: #f9fafb;
+        }
+
+        .botao {
+            display: inline-block;
+            background-color: #1e3a5f;
+            color: #fff;
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .botao:hover {
+            background-color: #274b7a;
+        }
+
+        form p {
+            margin-bottom: 1rem;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        form input, form select {
+            width: 100%;
+            max-width: 400px;
+            padding: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
+        .erro {
+            color: #b91c1c;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sistema de Inventário</h1>
+    </header>
+
+    <nav>
+        <a href="{% url 'inventario:lista_produtos' %}">Produtos</a>
+        <a href="{% url 'inventario:cadastrar_produto' %}">Novo Produto</a>
+        <a href="{% url 'inventario:lista_categorias' %}">Categorias</a>
+        <a href="/admin/">Admin</a>
+    </nav>
+
+    <main>
+        {% block conteudo %}{% endblock %}
+    </main>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{% extends 'inventario/base.html' %}
+
+
+{% block title %}Categorias - Inventário{% endblock title %}
+
+
+{% block conteudo %}
+    <h2>Lista de Categorias</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for categoria in categorias %}
+            <tr>
+                <td>{{ categoria.id }}</td>
+                <td>{{ categoria.nome }}</td>
+                <td>{{ categoria.descricao }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">Nenhuma categoria cadastrada.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+    

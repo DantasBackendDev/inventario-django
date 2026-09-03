@@ -1,0 +1,19 @@
+# Ambiente virtual
+venv/
+
+# Variáveis de ambiente e senhas
+.env
+
+# Cache do Python
+__pycache__/
+*.py[cod]
+
+# Banco SQLite (caso apareça)
+db.sqlite3
+
+# Configurações de editor
+.vscode/
+.idea/
+
+# Sistema
+.DS_Store

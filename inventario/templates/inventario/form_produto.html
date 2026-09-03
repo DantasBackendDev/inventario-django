@@ -1,0 +1,13 @@
+{% extends 'inventario/base.html' %}
+
+{% block titulo %}Cadastrar Produto{% endblock %}
+
+{% block conteudo %}
+<h2>Cadastrar Produto</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="botao">Salvar</button>
+</form>
+{% endblock %}
