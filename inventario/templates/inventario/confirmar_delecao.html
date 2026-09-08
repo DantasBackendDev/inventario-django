@@ -1,0 +1,20 @@
+{% extends 'inventario/base.html' %}
+
+{% block titulo %}Confirmar Exclusão{% endblock %}
+
+{% block conteudo %}
+<h2>Confirmar Exclusão</h2>
+
+{% if erro %}
+<p class="erro">{{ erro }}</p>
+{% endif %}
+
+<p>Tem certeza que deseja excluir o produto <strong>{{ produto.nome }}</strong>?</p>
+<p>Esta ação não pode ser desfeita.</p>
+
+<form method="post" style="margin-top: 1.5rem;">
+    {% csrf_token %}
+    <button type="submit" class="botao">Sim, excluir</button>
+    <a href="{% url 'inventario:lista_produtos' %}" class="botao">Cancelar</a>
+</form>
+{% endblock %}

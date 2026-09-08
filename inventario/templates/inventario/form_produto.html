@@ -1,9 +1,11 @@
 {% extends 'inventario/base.html' %}
 
-{% block titulo %}Cadastrar Produto{% endblock %}
+{% block titulo %}
+    {% if produto %}Editar Produto{% else %}Cadastrar Produto{% endif %}
+{% endblock %}
 
 {% block conteudo %}
-<h2>Cadastrar Produto</h2>
+<h2>{% if produto %}Editar Produto{% else %}Cadastrar Produto{% endif %}</h2>
 
 <form method="post">
     {% csrf_token %}

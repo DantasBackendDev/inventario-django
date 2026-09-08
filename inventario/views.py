@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
-from .models import Produto
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ProdutoForm
 from django.db import DatabaseError
 from .models import Produto, Categoria
+from django.db.models import Count
 
 # Create your views here.
 def lista_produtos(request):
@@ -25,7 +25,41 @@ def cadastrar_produto(request):
 
     return render(request, 'inventario/form_produto.html', {'form': form})
 
+
 def lista_categorias(request):
-    categorias = Categoria.objects.all()
+    categorias = Categoria.objects.annotate(total_produtos=Count('produtos')).order_by('id')
     contexto = {'categorias': categorias}
     return render(request, 'inventario/lista_categorias.html', contexto)
+
+
+def editar_produto(request, id):
+    produto = get_object_or_404(Produto, pk=id)
+
+    if request.method == 'POST':
+        form = ProdutoForm(request.POST, instance=produto)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('inventario:lista_produtos')
+            except DatabaseError:
+                form.add_error(None, 'Erro ao salvar no banco. Tente novamente.')
+    else:
+        form = ProdutoForm(instance=produto)
+
+    return render(request, 'inventario/form_produto.html', {'form': form, 'produto': produto})
+
+
+def deletar_produto(request, id):
+    produto = get_object_or_404(Produto, pk=id)
+
+    if request.method == 'POST':
+        try:
+            produto.delete()
+            return redirect('inventario:lista_produtos')
+        except DatabaseError:
+            return render(request, 'inventario/confirmar_delecao.html', {
+                'produto': produto,
+                'erro': 'Erro ao deletar. Tente novamente.'
+            })
+
+    return render(request, 'inventario/confirmar_delecao.html', {'produto': produto})   
