@@ -3,16 +3,19 @@ from .forms import ProdutoForm
 from django.db import DatabaseError
 from .models import Produto, Categoria
 from django.db.models import Count
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 
 # Create your views here.
 @login_required
+@permission_required('inventario.view_produto', raise_exception=True)
 def lista_produtos(request):
     produtos = Produto.objects.select_related('categoria').all()
     contexto = {'produtos': produtos}
     return render(request, 'inventario/lista_produtos.html', contexto)
 
+
 @login_required
+@permission_required('inventario.add_produto', raise_exception=True)
 def cadastrar_produto(request):
     if request.method == 'POST':
         form = ProdutoForm(request.POST)
@@ -27,13 +30,17 @@ def cadastrar_produto(request):
 
     return render(request, 'inventario/form_produto.html', {'form': form})
 
+
 @login_required
+@permission_required('inventario.view_categoria', raise_exception=True)
 def lista_categorias(request):
     categorias = Categoria.objects.annotate(total_produtos=Count('produtos')).order_by('id')
     contexto = {'categorias': categorias}
     return render(request, 'inventario/lista_categorias.html', contexto)
 
+
 @login_required
+@permission_required('inventario.change_produto', raise_exception=True)
 def editar_produto(request, id):
     produto = get_object_or_404(Produto, pk=id)
 
@@ -52,6 +59,7 @@ def editar_produto(request, id):
 
 
 @login_required
+@permission_required('inventario.delete_produto', raise_exception=True)
 def deletar_produto(request, id):
     produto = get_object_or_404(Produto, pk=id)
 
