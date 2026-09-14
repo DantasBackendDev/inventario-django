@@ -10,6 +10,11 @@ O sistema está publicado e pode ser acessado em:
 
 **https://inventario-django-yrgd.onrender.com/produtos/**
 
+Credenciais para teste (acesso somente leitura):
+
+- **Usuário:** `demo`
+- **Senha:** `demo12345`
+
 > O serviço usa hospedagem gratuita e pode levar até 50 segundos para responder no primeiro acesso.
 
 ---
