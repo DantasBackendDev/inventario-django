@@ -4,6 +4,14 @@ Sistema web para gestão de inventário de produtos, desenvolvido com Django e P
 
 Permite o cadastro e controle de produtos organizados por categoria, com painel administrativo e controle de acesso por perfil de usuário.
 
+## Demonstração ao vivo
+
+O sistema está publicado e pode ser acessado em:
+
+**https://inventario-django-yrgd.onrender.com/produtos/**
+
+> O serviço usa hospedagem gratuita e pode levar até 50 segundos para responder no primeiro acesso.
+
 ---
 
 ## Telas
