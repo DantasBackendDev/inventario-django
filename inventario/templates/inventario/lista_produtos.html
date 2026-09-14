@@ -25,9 +25,19 @@
             <td>{{ produto.quantidade_estoque }}</td>
             <td>{{ produto.categoria.nome }}</td>
             <td>
-                <a href="{% url 'inventario:editar_produto' produto.id %}">Editar</a>
-                &nbsp; |&nbsp;
-                <a href="{% url 'inventario:deletar_produto' produto.id %}">Excluir</a>
+                {% if perms.inventario.change_produto %}
+                    <a href="{% url 'inventario:editar_produto' produto.id %}">Editar</a>
+                {% endif %}
+
+                
+                {% if perms.inventario.change_produto and perms.inventario.delete_produto %}
+                     &nbsp;|&nbsp;
+                {% endif %}
+
+                
+                {% if perms.inventario.delete_produto %}
+                    <a href="{% url 'inventario:deletar_produto' produto.id %}">Excluir</a>
+                {% endif %}
             </td>
         </tr>
         {% empty %}

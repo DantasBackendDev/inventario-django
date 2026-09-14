@@ -164,10 +164,21 @@
     </header>
 
     <nav>
-        <a href="{% url 'inventario:lista_produtos' %}">Produtos</a>
-        <a href="{% url 'inventario:cadastrar_produto' %}">Novo Produto</a>
-        <a href="{% url 'inventario:lista_categorias' %}">Categorias</a>
-        <a href="/admin/">Admin</a>
+        {% if perms.inventario.view_produto %}
+            <a href="{% url 'inventario:lista_produtos' %}">Produtos</a>
+        {% endif %}
+
+        {% if perms.inventario.add_produto %}
+            <a href="{% url 'inventario:cadastrar_produto' %}">Novo Produto</a>
+        {% endif %}
+
+        {% if perms.inventario.view_categoria %}
+            <a href="{% url 'inventario:lista_categorias' %}">Categorias</a>
+       {% endif %}
+
+       {% if user.is_staff %}
+            <a href="/admin/">Admin</a>
+       {% endif %}
     </nav>
 
     <main>
